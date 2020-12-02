@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cell.cpp">
-      <Filter>Pliki zasobów</Filter>
-    </ClCompile>
     <ClCompile Include="Board.cpp">
       <Filter>Pliki zasobów</Filter>
     </ClCompile>
@@ -27,15 +24,30 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="SafeCell.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
+    <ClCompile Include="CellWithMine.cpp">
+      <Filter>Pliki zasobów</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cell.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="Board.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeCell.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="CellWithMine.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
