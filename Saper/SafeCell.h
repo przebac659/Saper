@@ -1,10 +1,11 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Cell.h"
 
-    class SafeCell :public Cell
+    class SafeCell : public Cell
     {
-    private:
+    protected:
         bool mine;
         //int seen;
         //int x;
@@ -12,6 +13,7 @@
         int number;
         bool clickedOnMine;
     public:
+        friend class Graphics;
         SafeCell();
         SafeCell(float, float);
         ~SafeCell();

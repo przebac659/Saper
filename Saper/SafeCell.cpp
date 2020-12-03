@@ -1,7 +1,4 @@
 #include "SafeCell.h"
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <SFML/Audio.hpp>
 
 SafeCell::SafeCell() {
     mine = 0;
@@ -29,18 +26,7 @@ void SafeCell::setMine() {
 }
 
 void SafeCell::drawCell(sf::RenderWindow& window, float size) {
-    if (seen == 0) {
-        sf::RectangleShape R(sf::Vector2f(size, size));
-        R.setFillColor(sf::Color::Green);
-        R.setPosition(x, y);
-        window.draw(R);
-    }  
-    if (seen == 2) {
-        sf::RectangleShape R(sf::Vector2f(size, size));
-        R.setFillColor(sf::Color::Red);
-        R.setPosition(x, y);
-        window.draw(R);
-    }
+    
 }
 
 void SafeCell::drawMines(sf::RenderWindow& window, float size) {

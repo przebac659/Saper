@@ -142,6 +142,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="CellWithMine.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="SafeCell.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="CellWithMine.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="SafeCell.h" />
     <ClInclude Include="Graphics.h" />
   </ItemGroup>
