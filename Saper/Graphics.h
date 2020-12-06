@@ -5,15 +5,14 @@
 
 class Graphics {
 protected:
-	//sf::RenderWindow* window;
-	sf::Event event;
-	Graphics* ptr[10][10];
+	sf::RenderWindow* window;
+	sf::Event event = {};
 	sf::Font font;
 public:
-	//void LoadWindow(int, std::string);
-	void OpenWindow(SafeCell* cell[10][10], sf::RenderWindow& window);
-	void drawCell(float, bool, int, int, sf::RenderWindow& window);
-	void drawMines(float, bool, int, int, sf::RenderWindow& window);
-	void drawNumber(int, int, int, sf::RenderWindow& window);
-	void reveal(int, int, SafeCell* cell[10][10], int, bool, int, sf::RenderWindow& window);
+	Graphics(int size, std::string name);
+	void OpenWindow(SafeCell* cell[10][10]);
+	void drawCell(float, int, int, int);
+	void drawMines(float, bool, int, int);
+	void drawNumber(int, int, int);
+	void reveal(SafeCell* cell[10][10]);
 };

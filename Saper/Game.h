@@ -20,7 +20,9 @@ protected:
 
 
 public:
-    void StartGame(sf::RenderWindow& window) {
+    void StartGame() {
+
+        graphics = new Graphics(590, "Sweeper!");
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -30,7 +32,7 @@ public:
 
            // non-deterministic generator
         mt19937 gen(rd());
-        discrete_distribution<> d({ 80, 20 });
+        discrete_distribution<> d({ 65, 35 });
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -45,7 +47,7 @@ public:
             }
         }
 
-        graphics->OpenWindow(ptr, window);
+        graphics->OpenWindow(ptr);
 
     }
 

@@ -11,8 +11,7 @@ using namespace sf;
 
 int main()
 {
-    RenderWindow window(sf::VideoMode(590, 590), "name");
     Game game;
-    game.StartGame(window);
+    game.StartGame();
     return 0;
 }
