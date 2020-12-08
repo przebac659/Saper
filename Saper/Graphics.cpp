@@ -3,10 +3,13 @@
 
 Graphics::Graphics(int size, std::string name)  {
     window = new sf::RenderWindow(sf::VideoMode(size, size), name);
-    font.loadFromFile("Steinberg.ttf");
+    if (!font.loadFromFile("Steinberg.ttf"))
+    {
+        throw std::logic_error("Font not loaded.");
+    }
 }
 
-void Graphics::OpenWindow(SafeCell* cell[10][10]) {
+void Graphics::OpenWindow(Cell* cell[10][10]) {
     while (window->isOpen())
     {
         while (window->pollEvent(event))
@@ -27,7 +30,7 @@ void Graphics::OpenWindow(SafeCell* cell[10][10]) {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                drawMines(20, cell[i][j]->mine, cell[i][j]->x, cell[i][j]->y);
+                drawMines(20, cell[i][j], cell[i][j]->x, cell[i][j]->y);
             }
         }
 
@@ -58,8 +61,8 @@ void Graphics::drawCell(float size, int seen, int x, int y) {
     }
 }
 
-void Graphics::drawMines(float size, bool mine, int x, int y) {
-    if (mine == 1) {
+void Graphics::drawMines(float size, Cell* cell, int x, int y) {
+    if (dynamic_cast<SafeCell*>(cell) == nullptr) {
         sf::RectangleShape R(sf::Vector2f(size, size));
         R.setFillColor(sf::Color::Blue);
         R.setPosition(x + 15, y + 15);
@@ -78,7 +81,7 @@ void Graphics::drawNumber(int number, int x, int y) {
         window->draw(text);
 }
 
-void Graphics::reveal(SafeCell* cell[10][10]) {
+void Graphics::reveal(Cell* cell[10][10]) {
     if (event.type == sf::Event::MouseButtonPressed)
     {
         for (int i = 0; i < 10; i++) {
@@ -86,6 +89,7 @@ void Graphics::reveal(SafeCell* cell[10][10]) {
                 if (event.mouseButton.button == sf::Mouse::Left && cell[i][j]->x + 50 > event.mouseButton.x && event.mouseButton.x > cell[i][j]->x && cell[i][j]->y + 50 > event.mouseButton.y && event.mouseButton.y > cell[i][j]->y && cell[i][j]->seen == 0)
                 {
                     cell[i][j]->seen = 1;
+                    std::cout << "Clicked\n";
                 }
                 else if (event.mouseButton.button == sf::Mouse::Right && cell[i][j]->x + 50 > event.mouseButton.x && event.mouseButton.x > cell[i][j]->x && cell[i][j]->y + 50 > event.mouseButton.y && event.mouseButton.y > cell[i][j]->y && cell[i][j]->seen == 0)
                 {
@@ -95,4 +99,3 @@ void Graphics::reveal(SafeCell* cell[10][10]) {
         }  
     }
 }
-

@@ -7,9 +7,13 @@ protected:
     int seen;
     int x;
     int y;
+    int number;
 public:
+    friend class Graphics;
+    friend class SafeCell;
     Cell();
     ~Cell();
-    void drawCell(sf::RenderWindow&, float);
-    void reveal(sf::Event&, Cell* ptr[10][10], sf::Sound&);
+    virtual void calculateNumber(Cell* ptr[10][10]) = 0;
+    //void setMine();
+    //virtual void GameOver(sf::Event&, sf::RenderWindow&, sf::Font&) = 0;
 };

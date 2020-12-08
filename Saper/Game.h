@@ -15,31 +15,31 @@ using namespace std;
 class Game {
 protected:
     Graphics* graphics;
-    SafeCell* ptr[10][10];
+    Cell* ptr[10][10];
     random_device rd;
 
 
 public:
     void StartGame() {
 
-        graphics = new Graphics(590, "Sweeper!");
-
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                ptr[i][j] = new SafeCell(60 * i, 60 * j);
-            }
+        try {
+            graphics = new Graphics(590, "Sweeper!");
         }
+        catch (const std::logic_error &e) {
+            std::cerr << "An error occured: " << e.what() << std::endl;
+        }
+        
 
-           // non-deterministic generator
         mt19937 gen(rd());
-        discrete_distribution<> d({ 65, 35 });
+        discrete_distribution<> d({ 25, 75 });
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (d(gen) == 1)
-                    ptr[i][j]->setMine();
+                if (d(gen) == 1) ptr[i][j] = new SafeCell(60 * i, 60 * j);
+                else ptr[i][j] = new CellWithMine(60 * i, 60 * j);
             }
         }
+
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -49,7 +49,14 @@ public:
 
         graphics->OpenWindow(ptr);
 
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                delete ptr[i][j];
+            }
+        }
+
     }
+
 
 
 };

@@ -6,23 +6,13 @@
     class SafeCell : public Cell
     {
     protected:
-        bool mine;
-        //int seen;
-        //int x;
-        //int y;
-        int number;
-        bool clickedOnMine;
+        //int number;
     public:
         friend class Graphics;
         SafeCell();
-        SafeCell(float, float);
+        SafeCell(int, int);
         ~SafeCell();
-        void drawCell(sf::RenderWindow&, float);
-        void drawMines(sf::RenderWindow&, float);
-        void calculateNumber(SafeCell* ptr[10][10]);
-        void drawNumber(sf::RenderWindow&, sf::Font&);
-        void setMine();
-        void reveal(sf::Event&, SafeCell* ptr[10][10], sf::Sound&);
-        void revealZeros(SafeCell* ptr[10][10]);
-        void GameOver(sf::Event&, sf::RenderWindow&, sf::Font&);
+        virtual void calculateNumber(Cell* ptr[10][10]);
+        //virtual void setMine();
+        //void GameOver(sf::Event&, sf::RenderWindow&, sf::Font&);
     };
