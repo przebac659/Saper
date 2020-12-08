@@ -12,7 +12,7 @@ public:
     friend class Graphics;
     friend class SafeCell;
     Cell();
-    ~Cell();
+    virtual ~Cell();
     virtual void calculateNumber(Cell* ptr[10][10]) = 0;
     //void setMine();
     //virtual void GameOver(sf::Event&, sf::RenderWindow&, sf::Font&) = 0;
