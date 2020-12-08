@@ -20,15 +20,14 @@ protected:
 
 
 public:
-    void StartGame() {
 
+    Game() {
         try {
             graphics = new Graphics(590, "Sweeper!");
         }
-        catch (const std::logic_error &e) {
+        catch (const std::logic_error& e) {
             std::cerr << "An error occured: " << e.what() << std::endl;
         }
-        
 
         mt19937 gen(rd());
         discrete_distribution<> d({ 25, 75 });
@@ -39,6 +38,9 @@ public:
                 else ptr[i][j] = new CellWithMine(60 * i, 60 * j);
             }
         }
+    }
+
+    void StartGame() {
 
 
         for (int i = 0; i < 10; i++) {
@@ -55,8 +57,7 @@ public:
             }
         }
 
+        delete graphics;
+
     }
-
-
-
 };
