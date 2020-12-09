@@ -5,8 +5,9 @@ Graphics::Graphics(int size, std::string name)  {
     window = new sf::RenderWindow(sf::VideoMode(size, size), name);
     if (!font.loadFromFile("Steinberg.ttf"))
     {
-        throw std::logic_error("Font not loaded.");
+        throw std::logic_error("Font not loaded.");     //exceptions
     }
+    gameOver = false;
 }
 
 void Graphics::OpenWindow(Cell* cell[10][10]) {
@@ -24,7 +25,7 @@ void Graphics::OpenWindow(Cell* cell[10][10]) {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                drawNumber(cell[i][j]->number, cell[i][j]->x, cell[i][j]->y);
+                drawNumber(cell[i][j]->number, cell[i][j]->x, cell[i][j]->y);       //draws number of the mines in neighbouring cell
             }
         }
 
@@ -39,6 +40,8 @@ void Graphics::OpenWindow(Cell* cell[10][10]) {
                 drawCell(50, cell[i][j]->seen, cell[i][j]->x, cell[i][j]->y);
             }
         }
+
+        GameOver();
 
         window->display();
     }
@@ -62,7 +65,7 @@ void Graphics::drawCell(float size, int seen, int x, int y) {
 }
 
 void Graphics::drawMines(float size, Cell* cell, int x, int y) {
-    if (dynamic_cast<SafeCell*>(cell) == nullptr) {
+    if (dynamic_cast<SafeCell*>(cell) == nullptr) {         //RTTI
         sf::RectangleShape R(sf::Vector2f(size, size));
         R.setFillColor(sf::Color::Blue);
         R.setPosition(x + 15, y + 15);
@@ -77,7 +80,7 @@ void Graphics::drawNumber(int number, int x, int y) {
     text.setCharacterSize(20);
     text.setFillColor(sf::Color::White);
     text.setPosition(x + 15, y + 15);
-    if (number > 0)
+    if (10 > number && number > 0)
         window->draw(text);
 }
 
@@ -86,16 +89,43 @@ void Graphics::reveal(Cell* cell[10][10]) {
     {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (event.mouseButton.button == sf::Mouse::Left && cell[i][j]->x + 50 > event.mouseButton.x && event.mouseButton.x > cell[i][j]->x && cell[i][j]->y + 50 > event.mouseButton.y && event.mouseButton.y > cell[i][j]->y && cell[i][j]->seen == 0)
+                if (event.mouseButton.button == sf::Mouse::Left && cell[i][j]->x + 50 > event.mouseButton.x && event.mouseButton.x > cell[i][j]->x && cell[i][j]->y + 50 > event.mouseButton.y && event.mouseButton.y > cell[i][j]->y && cell[i][j]->number>0 && cell[i][j]->number < 10)
                 {
                     cell[i][j]->seen = 1;
-                    std::cout << "Clicked\n";
+                }
+                else if (event.mouseButton.button == sf::Mouse::Left && cell[i][j]->x + 50 > event.mouseButton.x && event.mouseButton.x > cell[i][j]->x && cell[i][j]->y + 50 > event.mouseButton.y && event.mouseButton.y > cell[i][j]->y && cell[i][j]->number == 10)
+                {
+                    for (int a = 0; a < 10; a++) {
+                        for (int b = 0; b < 10; b++) {
+                            cell[a][b]->seen = 1;
+                        }
+                    }
+                    gameOver = true;
                 }
                 else if (event.mouseButton.button == sf::Mouse::Right && cell[i][j]->x + 50 > event.mouseButton.x && event.mouseButton.x > cell[i][j]->x && cell[i][j]->y + 50 > event.mouseButton.y && event.mouseButton.y > cell[i][j]->y && cell[i][j]->seen == 0)
                 {
                     cell[i][j]->seen = 2;
                 }
+                else if (event.mouseButton.button == sf::Mouse::Left && cell[i][j]->x + 50 > event.mouseButton.x && event.mouseButton.x > cell[i][j]->x && cell[i][j]->y + 50 > event.mouseButton.y && event.mouseButton.y > cell[i][j]->y && cell[i][j]->number==0)
+                {
+                    for (unsigned int a = std::max(0, cell[i][j]->x / 60 - 1); a < std::min(10, cell[i][j]->x / 60 + 2); ++a) {
+                        for (unsigned int b = std::max(0, cell[i][j]->y / 60 - 1); b < std::min(10, cell[i][j]->y / 60 + 2); ++b) {
+                            Cell* neighbouring_cell = cell[a][b];
+                            neighbouring_cell->seen = 1;
+                        }
+                    }
+                }
             }
         }  
     }
+}
+
+void Graphics::GameOver() { //displays "Game Over"
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Game over");
+    text.setCharacterSize(100);
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(7, 230);
+    if (gameOver==true) window->draw(text);
 }

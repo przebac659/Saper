@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 #include "SafeCell.h"
 
 class Graphics {
@@ -9,6 +10,7 @@ protected:
 	sf::RenderWindow* window;
 	sf::Event event = {};
 	sf::Font font;
+	bool gameOver;
 public:
 	Graphics(int size, std::string name);
 	void OpenWindow(Cell* cell[10][10]);
@@ -16,4 +18,5 @@ public:
 	void drawMines(float, Cell* cell, int, int);
 	void drawNumber(int, int, int);
 	void reveal(Cell* cell[10][10]);
+	void GameOver();
 };

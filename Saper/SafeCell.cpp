@@ -17,13 +17,9 @@ SafeCell::~SafeCell() {
 
 }
 
-//void SafeCell::setMine() {
-//    mine = 1;
-//}
+void SafeCell::calculateNumber(Cell* ptr[10][10]) {             //Calculates neighbors with the mine with respect to the boundaries of the board
 
-void SafeCell::calculateNumber(Cell* ptr[10][10]) {
-
-    for (unsigned int i = std::max(0, x / 60 - 1); i < std::min(10, x / 60 + 2); ++i) {
+    for (unsigned int i = std::max(0, x / 60 - 1); i < std::min(10, x / 60 + 2); ++i) {             //60 because 50 is the size of one cell and 10 is the empty space between cells
         for (unsigned int j = std::max(0, y / 60 - 1); j < std::min(10, y / 60 + 2); ++j) {
             if (i == x && j == y)
                 continue;
@@ -32,18 +28,3 @@ void SafeCell::calculateNumber(Cell* ptr[10][10]) {
         }
     }
 }
-
-/*void SafeCell::GameOver(sf::Event& event, sf::RenderWindow& window, sf::Font& font) {
-    sf::Text text;
-    text.setFont(font);
-    text.setString("Game over");
-    text.setCharacterSize(100);
-    text.setFillColor(sf::Color::Red);
-    text.setPosition(7, 230);
-    if (clickedOnMine == 1)
-    {
-        window.draw(text);
-    }
-    
-
-}*/

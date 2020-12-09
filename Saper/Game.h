@@ -17,8 +17,6 @@ protected:
     Graphics* graphics;
     Cell* ptr[10][10];
     random_device rd;
-
-
 public:
 
     Game() {
@@ -45,7 +43,7 @@ public:
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                ptr[i][j]->calculateNumber(ptr);
+                ptr[i][j]->calculateNumber(ptr);        //polymorphism
             }
         }
 
@@ -56,6 +54,8 @@ public:
                 delete ptr[i][j];
             }
         }
+
+
 
         delete graphics;
 

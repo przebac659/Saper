@@ -17,5 +17,5 @@ CellWithMine::~CellWithMine() {
 }
 
 void CellWithMine::calculateNumber(Cell* ptr[10][10]) {
-
+    number = 10;
 }

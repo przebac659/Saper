@@ -5,15 +5,13 @@
 class Cell {
 protected:
     int seen;
-    int x;
-    int y;
-    int number;
+    int x;      //coordinate X
+    int y;      //coordinate Y
+    int number; //number of neighbouring cells with mines
 public:
     friend class Graphics;
     friend class SafeCell;
     Cell();
     virtual ~Cell();
     virtual void calculateNumber(Cell* ptr[10][10]) = 0;
-    //void setMine();
-    //virtual void GameOver(sf::Event&, sf::RenderWindow&, sf::Font&) = 0;
 };
